@@ -1,6 +1,5 @@
 #Python
 import json
-from urllib import response
 from uuid import UUID
 from datetime import date, datetime
 from typing import Optional, List
@@ -180,7 +179,23 @@ def update_a_user():
   tags=["Tweets"]
 )
 def home():
-  return {"Twitter API": "Working"}
+  """
+  This path operation shows all tweets in the app
+
+  Parameters:
+    -
+  
+  Returns a JSON list with all tweets in the app, with the following keys:
+    - tweet_id: UUID
+    - content: str
+    - created_at: datetime
+    - updated_at: Optional[datetime]
+    - by: User
+  """
+
+  with open("tweets.json", "r", encoding="utf-8") as f:
+    results = json.loads(f.read())
+    return results
 
 @app.post(
   path="/post",
